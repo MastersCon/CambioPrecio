@@ -40,28 +40,28 @@ export class CambioPreciosComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName);
 
   }
-  actualizacion(){
-    const element = document.getElementById('Calld');
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-    const data = XLSX.utils.sheet_to_json(ws, {header:1});
+    actualizacion(){
+      const element = document.getElementById('Calld');
+      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+      const data = XLSX.utils.sheet_to_json(ws, {header:1});
 
-    const newData = data.slice(1).map((row: any) => {
-      const valor = row[1];
-      let valorRedondeado = Math.ceil(valor/5)*5 - (valor % 5 === 1 ? 1 : 0);
-      if (valor % 10 === 9) {
-        valorRedondeado = valor;
-      }
-      return {
-        Code: row[0],
-        Precio: valor,
-        NuevoPrecio: valorRedondeado
-      }
-    });
+      const newData = data.slice(1).map((row: any) => {
+        const valor = row[1];
+        let valorRedondeado = Math.ceil(valor/5)*5 - (valor % 5 === 1 ? 1 : 0);
+        if (valor % 10 === 9) {
+          valorRedondeado = valor;
+        }
+        return {
+          Code: row[0],
+          Precio: valor,
+          NuevoPrecio: valorRedondeado
+        }
+      });
 
-    this.ExcelData = newData;
+      this.ExcelData = newData;
 
-    console.log(newData);
-  }
+      console.log(newData);
+    }
   onButtonClick(event: MouseEvent) {
     (event.target as HTMLButtonElement).disabled = true;
   }
