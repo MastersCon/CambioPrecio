@@ -1,0 +1,66 @@
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  position: absolute;
+  z-index: 1;
+}
+  .drag-drop span.desc {
+  display: block;
+  font-size: .7em;
+  padding: 0 .5em;
+  color: #000;
+  }
+  input[type="file"] {
+  height: 10em;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  }
+
+  .bi{
+      font-size:25px;
+  }
+
+.card {
+  display: block;
+  position: relative;
+  background-color: #f2f8f9;
+  border-radius: 4px;
+  text-decoration: none;
+  z-index: 0;
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -16px;
+    right: -16px;
+    background: #74a41c;
+    height: 32px;
+    width: 32px;
+    border-radius: 26px;
+    transform: scale(1);
+    transform-origin: 90% 60%;
+    transition: transform 0.45s ease-out;
+  }
+
+  &:hover:before {
+    transform: scale(21);
+  }
+}
+
+.card:hover {
+  p {
+    transition: all 0.3s ease-out;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  h6 {
+    transition: all 0.3s ease-out;
+    color: #ffffff;
+  }
+}
