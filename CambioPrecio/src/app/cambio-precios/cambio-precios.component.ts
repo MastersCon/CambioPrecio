@@ -64,6 +64,16 @@ export class CambioPreciosComponent implements OnInit {
         valorRedondeado = valor;
       }
 
+      // Redondear cualquier número menor a 60 que tenga un decimal hacia arriba
+      else if (valor < 60 && valor % 1 !== 0) {
+        valorRedondeado = Math.ceil(valor);
+      }
+
+      // Redondear cualquier número mayor a 60 que termine en 4 o 8 hacia arriba
+      else if (valor > 60 && valor % 10 === 4 || valor % 10 === 8) {
+        valorRedondeado = Math.ceil(valor);
+      }
+
       // Redondear cualquier otro número según las condiciones previas
       else if (valor % 1 !== 0) {
         valorRedondeado = Math.floor(valor);
@@ -88,8 +98,6 @@ export class CambioPreciosComponent implements OnInit {
 
     console.log(newData);
   }
-
-
 
   onButtonClick(event: MouseEvent) {
     (event.target as HTMLButtonElement).disabled = true;
