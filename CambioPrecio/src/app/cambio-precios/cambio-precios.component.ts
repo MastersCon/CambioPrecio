@@ -70,7 +70,7 @@ export class CambioPreciosComponent implements OnInit {
       }
 
       // Redondear cualquier número mayor a 60 que termine en 4 o 8 hacia arriba
-      else if (valor > 60 && valor % 10 === 4 || valor % 10 === 8) {
+      else if (valor > 60 && (valor % 10 === 4 || valor % 10 === 8)) {
         valorRedondeado = Math.ceil(valor);
       }
 
@@ -98,6 +98,7 @@ export class CambioPreciosComponent implements OnInit {
 
     console.log(newData);
   }
+
 
   onButtonClick(event: MouseEvent) {
     (event.target as HTMLButtonElement).disabled = true;
