@@ -40,6 +40,9 @@ export class CambioPreciosComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName);
 
   }
+
+
+
   actualizacion(){
     const element = document.getElementById('Calld');
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
@@ -71,12 +74,26 @@ export class CambioPreciosComponent implements OnInit {
 
       // Redondear cualquier número mayor a 60 que termine en 4 o 8 hacia arriba
       else if (valor > 60 && valor % 10 === 4 || valor % 10 === 8) {
-        valorRedondeado = Math.ceil(valor);
+        if (valor % 1 >= 0.5) {
+          valorRedondeado = Math.ceil(valor);
+        } else {
+          valorRedondeado = Math.floor(valor);
+        }
       }
 
       // Redondear cualquier otro número según las condiciones previas
       else if (valor % 1 !== 0) {
-        valorRedondeado = Math.floor(valor);
+        // Redondear números que terminan en 4 o 8 y tienen decimales
+        if (valor > 60 && (valor % 10 === 4 || valor % 10 === 8)) {
+          if (valor % 1 >= 0.5) {
+            const integerPart = Math.floor(valor) + 1;
+            valorRedondeado = Math.floor(integerPart);
+          } else {
+            valorRedondeado = Math.floor(valor);
+          }
+        } else {
+          valorRedondeado = Math.floor(valor);
+        }
       } else if (valor > 60) {
         const ultimoDigito = valor % 10;
         let ajuste = 0;
@@ -98,6 +115,8 @@ export class CambioPreciosComponent implements OnInit {
 
     console.log(newData);
   }
+
+
 
   onButtonClick(event: MouseEvent) {
     (event.target as HTMLButtonElement).disabled = true;
